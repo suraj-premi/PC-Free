@@ -1,0 +1,11 @@
+name: pc-free
+
+services:
+  windows:
+    environment:
+      VERSION: "10"
+      RAM_SIZE: "half"
+      CPU_CORES: "max"
+      DISK_SIZE: "max"
+      DISK_MINIMUM: "1G"
+    restart: on-failure

@@ -1,0 +1,45 @@
+name: pc-free
+
+services:
+  windows:
+    image: "${WINDOWS_IMAGE:-ghcr.io/dockur/windows:6.06}"
+    container_name: pc-free-windows
+    volumes:
+      - type: bind
+        source: "${WINDOWS_STORAGE_PATH:-./windows}"
+        target: /storage
+      - type: bind
+        source: "${WINDOWS_SHARED_PATH:-./shared}"
+        target: /shared
+    environment:
+      VERSION: "10"
+      USERNAME: "${WINDOWS_USERNAME:?Run ./pcfree setup to create .env}"
+      PASSWORD: "${WINDOWS_PASSWORD:?Run ./pcfree setup to create .env}"
+      LANGUAGE: "${WINDOWS_LANGUAGE:-en-US}"
+      REGION: "${WINDOWS_REGION:-en-US}"
+      KEYBOARD: "${WINDOWS_KEYBOARD:-en-US}"
+      RAM_SIZE: "${WINDOWS_RAM_SIZE:-4G}"
+      CPU_CORES: "${WINDOWS_CPU_CORES:-2}"
+      DISK_SIZE: "${WINDOWS_DISK_SIZE:-64G}"
+      AUDIO: "${WINDOWS_AUDIO:-Y}"
+      PROTECT: "${WINDOWS_WEB_AUTH:-Y}"
+    ports:
+      - target: 3389
+        published: "${RDP_PORT:-3389}"
+        host_ip: "${RDP_BIND_ADDRESS:-127.0.0.1}"
+        protocol: tcp
+      - target: 3389
+        published: "${RDP_PORT:-3389}"
+        host_ip: "${RDP_BIND_ADDRESS:-127.0.0.1}"
+        protocol: udp
+      - target: 8006
+        published: "${WEB_PORT:-8006}"
+        host_ip: "${WEB_BIND_ADDRESS:-127.0.0.1}"
+        protocol: tcp
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    stop_grace_period: 2m

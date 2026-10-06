@@ -1,14 +1,14 @@
-# PC-Free - Windows 10 in GitHub Codespaces | Run Windows 10 Free in Browser
+# PC-Free — Windows 10 in GitHub Codespaces and Docker
 
-Run a complete Windows 10 environment in your browser using Docker and GitHub Codespaces. Free, fast, and no installation required.
+Run a complete Windows 10 environment in your browser with automatic setup, secure generated credentials, and persistent storage. PC-Free is open source; cloud-host usage and Windows licensing are separate.
 
-[![GitHub stars](https://img.shields.io/github/stars/jephersonRD/pc-free?style=social)](https://github.com/jephersonRD/pc-free/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/jephersonRD/pc-free?style=social)](https://github.com/jephersonRD/pc-free/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/suraj-premi/PC-Free?style=social)](https://github.com/suraj-premi/PC-Free/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/suraj-premi/PC-Free?style=social)](https://github.com/suraj-premi/PC-Free/network/members)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Windows 10](https://img.shields.io/badge/Windows-10-0078D6?style=flat&logo=windows&logoColor=white)](https://www.microsoft.com/windows)
 
-**[🇪🇸 Español](#español)** • **[🚀 Quick Start](#quick-start-run-windows-10-in-5-minutes)** • **[📖 Documentation](#documentation)** • **[🐛 Report Bug](https://github.com/jephersonRD/pc-free/issues)**
+**[🇪🇸 Español](#español)** • **[🚀 Quick Start](#quick-start-windows-10-in-your-browser)** • **[📖 Documentation](#documentation)** • **[🐛 Report Bug](https://github.com/suraj-premi/PC-Free/issues)**
 
 ![Windows 10 Desktop in Browser](./images/windows10-desktop.png)
 
@@ -16,11 +16,11 @@ Run a complete Windows 10 environment in your browser using Docker and GitHub Co
 
 ## What is PC-Free?
 
-PC-Free is an open-source project that lets you run Windows 10 directly in your web browser using GitHub Codespaces and Docker. No local installation, no powerful hardware required, completely free.
+PC-Free is an open-source project that lets you run Windows 10 directly in your web browser using GitHub Codespaces and Docker. No local Windows installation or powerful client device is required. Codespaces usage depends on your GitHub quota.
 
 ### Key Benefits
 
-- ✅ **100% Free** - No hidden costs or subscriptions
+- ✅ **Open Source** - PC-Free has no software fee; cloud-host quota may apply
 - ✅ **Browser-Based** - Access Windows from any device
 - ✅ **5-Minute Setup** - Deploy Windows 10 in minutes
 - ✅ **No PC Required** - Run Windows without owning a Windows PC
@@ -32,13 +32,11 @@ PC-Free is an open-source project that lets you run Windows 10 directly in your 
 
 ## Table of Contents
 
-- [Features](#features)
-- [Use Cases](#use-cases---when-to-use-pc-free)
-- [Quick Start](#quick-start-run-windows-10-in-5-minutes)
+- [Quick Start](#quick-start-windows-10-in-your-browser)
 - [System Requirements](#system-requirements)
-- [Installation Guide](#guía-rápida)
-- [Usage Instructions](#usage-instructions)
-- [Configuration Options](#configuration-options)
+- [Management Commands](#management-commands)
+- [Configuration](#configuration)
+- [Hindi Setup Guide](SETUP-HI.md)
 - [FAQ](#frequently-asked-questions-faq)
 - [Troubleshooting](#troubleshooting-common-issues)
 - [Contributing](#contributing)
@@ -54,8 +52,8 @@ Compare PC-Free with other Windows cloud solutions:
 
 | Feature | PC-Free | Azure Virtual Desktop | AWS WorkSpaces | Local VM |
 |---------|---------|----------------------|----------------|----------|
-| **Monthly Cost** | ✅ $0 (Free) | ❌ $31-100+ | ❌ $25-75+ | ✅ $0 (Free) |
-| **Setup Time** | ⚡ 5 minutes | ⏱️ 30+ minutes | ⏱️ 30+ minutes | ⏱️ 15-30 minutes |
+| **Monthly Cost** | ✅ Uses free quota | ❌ $31-100+ | ❌ $25-75+ | ✅ $0 (Free) |
+| **Setup Time** | ⚡ 10–20 minutes | ⏱️ 30+ minutes | ⏱️ 30+ minutes | ⏱️ 15-30 minutes |
 | **Hardware Required** | ✅ None | ✅ None | ✅ None | ❌ Powerful PC needed |
 | **Browser Access** | ✅ Yes | ✅ Yes | ✅ Yes | ⚠️ Limited |
 | **Open Source** | ✅ Yes | ❌ No | ❌ No | ⚠️ Partial |
@@ -63,252 +61,103 @@ Compare PC-Free with other Windows cloud solutions:
 
 ---
 
-## Quick Start: Run Windows 10 in 5 Minutes
+## Quick Start: Windows 10 in Your Browser
 
-### Method 1: One-Click GitHub Codespaces (Recommended)
+> **Hindi instructions:** [SETUP-HI.md](SETUP-HI.md)
+>
+> Windows 10 reached end of support on October 14, 2025. Use it only when you specifically need Windows 10, keep the browser port private, and provide your own valid Microsoft licence.
 
-The fastest way to get Windows 10 running in your browser:
+### Option 1: GitHub Codespaces (recommended)
 
-1. **Fork this repository** - Click "Fork" button at top right
-2. **Open Codespace** - Click "Code" → "Codespaces" → "Create codespace on main"
-3. **Wait for setup** - Environment loads automatically (~2 minutes)
-4. **Follow the Guía Rápida below**
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/suraj-premi/PC-Free?quickstart=1)
 
-### Method 2: Manual Docker Setup
-
-For local Docker installation, see the complete guide below.
-
----
-
-## Guía Rápida
-
-### 1️⃣ Verifica el almacenamiento disponible
+1. Fork this repository, then create a Codespace with **4 cores or more**.
+2. The included Dev Container configuration creates secure credentials and starts Windows 10 automatically.
+3. Codespaces opens the forwarded **Windows 10 (Web)** port (8006). Keep its visibility **Private**.
+4. In the Codespace terminal, display the generated login:
 
 ```bash
-df -h
+./pcfree credentials
 ```
 
-Escoge la partición con más espacio libre.
+The first installation normally takes 10–20 minutes. The Windows disk persists when the Codespace stops.
 
-### 2️⃣ Crea la carpeta de datos para Docker
+### Option 2: KVM-enabled Linux host
 
 ```bash
-sudo mkdir -p /tmp/docker-data
+git clone https://github.com/suraj-premi/PC-Free.git
+cd PC-Free
+./pcfree setup
 ```
 
-### 3️⃣ Configura Docker
+The setup command:
 
-Edita el archivo:
+- generates a private `.env` file and strong Windows password;
+- verifies Docker, Compose, KVM, TUN, CPU, RAM, and storage;
+- downloads the pinned Dockur Windows image;
+- starts an unattended Windows 10 Pro installation; and
+- keeps the VM disk under `windows/` and shared files under `shared/`.
 
-```bash
-sudo nano /etc/docker/daemon.json
-```
-
-Agrega:
-
-```json
-{
-  "data-root": "/tmp/docker-data"
-}
-```
-
-### 4️⃣ Reinicia tu Codespace
-
-Para aplicar los cambios de configuración.
-
-### 5️⃣ Verifica Docker
-
-```bash
-docker info
-```
-
-Asegúrate de que `Docker Root Dir` sea `/tmp/docker-data`.
-
----
-
-## 🧱 Archivo `windows10.yml`
-
-```yaml
-# Antes de ejecutar docker-compose up, ejecuta:
-# bash check_github_follow.sh || exit 1
-# Si no sigues a https://github.com/jephersonRD, el entorno no se iniciará.
-services:
-  windows:
-    image: dockurr/windows
-    container_name: windows
-    environment:
-      VERSION: "10"
-      USERNAME: ${WINDOWS_USERNAME}
-      PASSWORD: ${WINDOWS_PASSWORD}
-      RAM_SIZE: "10G"
-      CPU_CORES: "4"
-    cap_add:
-      - NET_ADMIN
-    ports:
-      - "8006:8006"
-      - "3389:3389/tcp"
-    volumes:
-      - /tmp/docker-data:/mnt/disco1
-      - windows-data:/mnt/windows-data
-    devices:
-      - "/dev/kvm:/dev/kvm"
-      - "/dev/net/tun:/dev/net/tun"
-    stop_grace_period: 2m
-    restart: always
-
-volumes:
-  windows-data:
-```
-
----
-
-## 🗝️ Archivo `.env`
-
-```ini
-WINDOWS_USERNAME=YourUsername
-WINDOWS_PASSWORD=YourPassword
-GITHUB_USER=YourGitHubUsername
-```
-
-### 🛑 Agrega este archivo a tu `.gitignore`:
-
-```bash
-echo ".env" >> .gitignore
-```
-
----
-
-## ▶️ Inicia el contenedor
-
-### Iniciar por primera vez
-
-```bash
-docker-compose -f windows10.yml up
-```
-
-### 🔌 Apagar la PC
-
-```bash
-docker stop windows
-```
-
----
+Open <http://localhost:8006> and get the login with `./pcfree credentials`.
 
 ## System Requirements
 
-### For GitHub Codespaces (Recommended)
+### GitHub Codespaces
 
-- GitHub account (free tier supported)
-- Modern web browser (Chrome 90+, Firefox 88+, Edge 90+, Safari 14+)
-- 10GB+ available Codespace storage
-- Stable internet connection (2 Mbps+ recommended)
+- GitHub account with Codespaces quota
+- x86_64 Codespace, 4 cores recommended
+- At least 32 GB available storage
+- Modern web browser and stable connection
 
-### For Local Docker Installation
+### Local host
 
-- Docker Engine 20.10 or higher
-- 20GB+ free disk space
-- 8GB+ RAM (16GB recommended)
-- KVM support (Linux hosts) or Hyper-V (Windows hosts)
-- Operating System: Linux, macOS, or Windows 10/11 Pro
+- x86_64 **Linux** host with `/dev/kvm` access
+- Docker Engine and Docker Compose v2
+- 2+ CPU cores (4 recommended)
+- 4+ GB host RAM (8 GB recommended)
+- 32+ GB free disk space
 
----
+> Docker Desktop on macOS, Linux, and Windows 10 does not expose KVM to this container and is not supported. Windows 11 requires nested virtualization. Run `./pcfree doctor` before downloading anything to verify your machine.
 
-## Usage Instructions
-
-### Start Windows Environment
-
-Start the Windows container:
+## Management Commands
 
 ```bash
-docker-compose -f windows10.yml up -d
+./pcfree doctor       # Check all host requirements
+./pcfree start        # Start or resume Windows
+./pcfree stop         # Graceful shutdown; data is preserved
+./pcfree restart      # Restart the VM
+./pcfree status       # Show container health/status
+./pcfree logs         # Follow installation and runtime logs
+./pcfree open         # Open the browser viewer
+./pcfree credentials  # Show Windows/web username and password
+./pcfree update       # Pull the configured image and recreate safely
+./pcfree down         # Remove the container, not the VM data
 ```
 
-### Stop Windows Environment
+## Configuration
 
-Stop the Windows container gracefully:
+`./pcfree setup` creates `.env` from [.env.example](.env.example). Edit that local file to customize Windows, then run `./pcfree down && ./pcfree start`.
 
-```bash
-docker stop windows
+```ini
+WINDOWS_RAM_SIZE=4G
+WINDOWS_CPU_CORES=2
+WINDOWS_DISK_SIZE=64G
+WINDOWS_LANGUAGE=en-US
+WINDOWS_REGION=en-US
+WINDOWS_KEYBOARD=en-US
+WEB_PORT=8006
+RDP_PORT=3389
 ```
 
-### Restart Windows
+The web viewer and RDP bind to `127.0.0.1` by default. Do not expose RDP directly to the public internet. The web viewer uses the generated Windows credentials for HTTP authentication.
 
-Restart the container (useful after freezes):
+### Persistent storage and file sharing
 
-```bash
-docker restart windows
-```
+- `windows/` contains the virtual disk and survives container recreation.
+- `shared/` appears as the `Shared` desktop folder and `Z:` drive in Windows.
+- `.env` contains credentials, is mode `600`, and is ignored by Git.
 
-### View Container Logs
-
-Monitor Windows container activity:
-
-```bash
-docker logs -f windows
-```
-
-Press Ctrl+C to exit log view.
-
-### Complete Removal
-
-Remove container and all data volumes:
-
-```bash
-docker-compose -f windows10.yml down -v
-```
-
-**⚠️ Warning**: This deletes all Windows data permanently.
-
----
-
-## Configuration Options
-
-### Customize System Resources
-
-Edit `windows10.yml` to adjust resources:
-
-```yaml
-environment:
-  VERSION: "10"              # Windows version (10 or 11)
-  RAM_SIZE: "10G"           # RAM allocation
-  CPU_CORES: "4"            # CPU core count
-  DISK_SIZE: "64G"          # Virtual disk size
-  USERNAME: ${WINDOWS_USERNAME}
-  PASSWORD: ${WINDOWS_PASSWORD}
-```
-
-### Switch to Windows 11
-
-Change Windows version in environment:
-
-```yaml
-environment:
-  VERSION: "11"  # Windows 11
-```
-
-### Enable RDP Access
-
-Add RDP port mapping for native Remote Desktop:
-
-```yaml
-ports:
-  - "8006:8006"    # Web interface (noVNC)
-  - "3389:3389"    # RDP protocol
-```
-
-Connect using RDP client: `localhost:3389`
-
-### Adjust Performance Settings
-
-For slower systems, reduce resource allocation:
-
-```yaml
-environment:
-  RAM_SIZE: "6G"     # Minimum for Windows 10
-  CPU_CORES: "2"     # Minimum cores
-```
-
----
+To remove Windows permanently, stop it first and then manually delete `windows/`. This cannot be undone.
 
 ## Screenshots
 
@@ -318,16 +167,13 @@ environment:
 ### Windows 11 Alternative
 ![Windows 11 About](./images/windows11-about.png)
 
-### Browser-Based Access
-![Browser Interface](./images/browser-interface.png)
-
 ---
 
 ## Frequently Asked Questions (FAQ)
 
 ### How long does Windows take to boot?
 
-- **Initial boot**: 5-10 minutes (downloading Windows image)
+- **Initial boot**: usually 10–20 minutes (download + unattended installation)
 - **Subsequent boots**: 2-3 minutes
 
 ### Can I install additional software?
@@ -336,7 +182,7 @@ Yes! You have full administrator access. Installed software persists in Docker v
 
 ### Does this work on GitHub free tier?
 
-Yes! GitHub free tier includes 60 hours/month of Codespaces, which is sufficient for regular testing and development work.
+It can, if your GitHub account has enough Codespaces quota. Quotas and machine availability depend on your current GitHub plan; check the billing page before starting a large machine.
 
 ### Can I use this for gaming?
 
@@ -348,7 +194,7 @@ Yes, provided you have a valid Windows license. This uses official Windows insta
 
 ### How secure is this setup?
 
-Your Windows environment runs in an isolated Docker container within your private GitHub Codespace. Only you have access unless you share the Codespace link.
+The VM runs inside a container, the Codespaces forwarded port is private by default, and the web viewer requires the generated login. Keep port 8006 private and never expose RDP directly to the public internet.
 
 ### Can I access my files from outside?
 
@@ -356,7 +202,7 @@ Yes, files stored in Docker volumes persist between sessions. You can also mount
 
 ### What internet speed do I need?
 
-Minimum 2 Mbps for basic usage. 5+ Mbps recommended for smooth experience. Initial setup requires downloading ~4GB Windows image.
+Minimum 2 Mbps for basic usage. 5+ Mbps recommended for smooth experience. Initial setup downloads a Windows image of roughly 6 GB.
 
 ---
 
@@ -364,10 +210,11 @@ Minimum 2 Mbps for basic usage. 5+ Mbps recommended for smooth experience. Initi
 
 ### Windows Container Won't Start
 
-Check Docker logs for errors:
+Run the built-in checks, then inspect the logs:
 
 ```bash
-docker logs windows
+./pcfree doctor
+./pcfree logs
 ```
 
 Verify KVM access (Linux):
@@ -378,29 +225,28 @@ ls -la /dev/kvm
 
 ### Slow Performance Issues
 
-1. Reduce RAM allocation to 6G
-2. Reduce CPU cores to 2
+1. Ensure the host has at least 4 GB RAM (8 GB recommended)
+2. Keep at least 2 CPU cores assigned
 3. Close other resource-intensive Codespace apps
-4. Check Codespace resource usage
+4. Use RDP on `localhost:3389` after installation for better responsiveness
 
 ### Cannot Access Port 8006
 
-1. Go to "Ports" tab in Codespace
-2. Make port 8006 visibility "Public"
-3. Click globe icon to open in browser
-4. Check firewall settings if on local Docker
+1. Run `./pcfree status` and confirm the service is running
+2. In Codespaces, open the **Ports** tab and keep port 8006 **Private**
+3. Click the globe icon next to port 8006
+4. Locally, open `http://localhost:8006` and check firewall settings
 
 ### Storage Full Error
 
-Clean Docker cache and unused images:
+Check what is consuming space before deleting anything:
 
 ```bash
-# Remove unused Docker data
-docker system prune -a
-
-# Check available space
 df -h
+docker system df
 ```
+
+The persistent VM is in `windows/`. Do not delete that folder unless you intend to erase Windows permanently.
 
 ### Container Keeps Restarting
 
@@ -417,8 +263,8 @@ ls -l /dev/kvm
 
 1. Wait 2-3 minutes for desktop to load
 2. Try refreshing browser
-3. Check if container is still running: `docker ps`
-4. Restart container: `docker restart windows`
+3. Check if container is still running: `./pcfree status`
+4. Restart container: `./pcfree restart`
 
 ---
 
@@ -429,7 +275,7 @@ ls -l /dev/kvm
 - [x] Web interface (noVNC)
 - [x] Persistent storage volumes
 - [x] Windows 11 support
-- [ ] One-click installer script
+- [x] One-command setup and diagnostics
 - [ ] GPU passthrough (local Docker)
 - [ ] Audio support improvement
 - [ ] Clipboard synchronization
@@ -438,7 +284,7 @@ ls -l /dev/kvm
 - [ ] Automated backup system
 - [ ] Performance optimization guide
 
-[Vote for features →](https://github.com/jephersonRD/pc-free/discussions)
+[Vote for features →](https://github.com/suraj-premi/PC-Free/discussions)
 
 ---
 
@@ -466,19 +312,19 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Community & Support
 
-- 💬 [GitHub Discussions](https://github.com/jephersonRD/pc-free/discussions) - Ask questions
-- 🐛 [Issue Tracker](https://github.com/jephersonRD/pc-free/issues) - Report bugs
-- ⭐ [Star this repo](https://github.com/jephersonRD/pc-free) - Show support
+- 💬 [GitHub Discussions](https://github.com/suraj-premi/PC-Free/discussions) - Ask questions
+- 🐛 [Issue Tracker](https://github.com/suraj-premi/PC-Free/issues) - Report bugs
+- ⭐ [Star this repo](https://github.com/suraj-premi/PC-Free) - Show support
 - 👤 Follow [@jephersonRD](https://github.com/jephersonRD) for updates
 
 ---
 
 ## Documentation
 
-- 📖 [Full Documentation](https://github.com/jephersonRD/pc-free/wiki)
-- 🚀 [Advanced Setup Guide](https://github.com/jephersonRD/pc-free/wiki/Advanced-Setup)
-- 🔧 [Troubleshooting Guide](https://github.com/jephersonRD/pc-free/wiki/Troubleshooting)
-- 🎯 [Best Practices](https://github.com/jephersonRD/pc-free/wiki/Best-Practices)
+- 📖 [Full Documentation](https://github.com/suraj-premi/PC-Free/wiki)
+- 🚀 [Advanced Setup Guide](https://github.com/suraj-premi/PC-Free/wiki/Advanced-Setup)
+- 🔧 [Troubleshooting Guide](https://github.com/suraj-premi/PC-Free/wiki/Troubleshooting)
+- 🎯 [Best Practices](https://github.com/suraj-premi/PC-Free/wiki/Best-Practices)
 
 ---
 
@@ -494,7 +340,7 @@ Special thanks to:
 
 - [dockurr/windows](https://github.com/dockurr/windows) - Docker Windows image
 - [GitHub Codespaces](https://github.com/features/codespaces) - Cloud development environment
-- All our [amazing contributors](https://github.com/jephersonRD/pc-free/graphs/contributors)
+- All our [amazing contributors](https://github.com/suraj-premi/PC-Free/graphs/contributors)
 
 ---
 
@@ -518,7 +364,7 @@ If PC-Free helped you, consider:
 3. Sigue la Guía Rápida arriba
 4. Accede al puerto 8006
 
-[Ver documentación completa →](https://github.com/jephersonRD/pc-free/wiki)
+[Ver documentación completa →](https://github.com/suraj-premi/PC-Free/wiki)
 
 ---
 

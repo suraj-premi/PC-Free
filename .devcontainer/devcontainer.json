@@ -1,0 +1,26 @@
+{
+  "name": "PC-Free — Windows 10",
+  "dockerComposeFile": [
+    "../windows10.yml",
+    "codespaces.yml"
+  ],
+  "service": "windows",
+  "initializeCommand": "bash .devcontainer/initialize.sh",
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+  "forwardPorts": [8006],
+  "portsAttributes": {
+    "8006": {
+      "label": "Windows 10 (Web)",
+      "onAutoForward": "openBrowser",
+      "protocol": "http"
+    }
+  },
+  "otherPortsAttributes": {
+    "onAutoForward": "ignore"
+  },
+  "shutdownAction": "stopCompose"
+}

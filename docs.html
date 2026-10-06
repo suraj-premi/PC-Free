@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-adsense-account" content="ca-pub-9208880316800976">
-<title>Documentation | PC-Free — Windows 10 in Browser (2025)</title>
+<title>Documentation | PC-Free — Windows 10 in Browser</title>
 <meta name="description" content="Full documentation for PC-Free. Learn how to run Windows 10 free in your browser using Docker and GitHub Codespaces. Setup, config, commands & troubleshooting.">
 <meta name="keywords" content="windows 10 browser documentation, cloud pc setup guide, docker windows container, github codespaces tutorial">
 <link rel="canonical" href="https://jephersonrd.github.io/PC-Free/docs.html">
@@ -670,7 +670,7 @@ code {
       <a href="Compare.html"   class="nav-link">COMPARISON</a>
       <a href="faq.html"       class="nav-link">FAQ</a>
       <a href="docs.html"      class="nav-link active">DOCS</a>
-      <a href="https://github.com/jephersonRD/pc-free" class="nav-link" target="_blank">GITHUB</a>
+      <a href="https://github.com/suraj-premi/PC-Free" class="nav-link" target="_blank">GITHUB</a>
     </div>
   </nav>
 
@@ -714,10 +714,10 @@ code {
     <div class="sidebar-divider"></div>
 
     <div class="sidebar-section">
-      <a href="https://github.com/jephersonRD/pc-free" target="_blank" class="sidebar-link">
+      <a href="https://github.com/suraj-premi/PC-Free" target="_blank" class="sidebar-link">
         <i class="ti ti-brand-github"></i> GitHub Repo
       </a>
-      <a href="https://github.com/jephersonRD/pc-free/issues" target="_blank" class="sidebar-link">
+      <a href="https://github.com/suraj-premi/PC-Free/issues" target="_blank" class="sidebar-link">
         <i class="ti ti-bug"></i> Report Bug
       </a>
     </div>
@@ -731,10 +731,10 @@ code {
     <div class="doc-hero" id="overview">
       <div class="eyebrow"><i class="ti ti-book-2"></i> Documentation</div>
       <h1>Run <em>Windows 10</em><br>Free in Your Browser</h1>
-      <p>Deploy a complete Windows 10 environment using Docker and GitHub Codespaces. No PC required, no cost, no installation.</p>
+      <p>Deploy a complete Windows 10 environment using Docker and GitHub Codespaces. No Windows PC or local installation required; Codespaces usage counts against your GitHub quota.</p>
 
       <div class="badges">
-        <a class="badge gray"  href="https://github.com/jephersonRD/pc-free/stargazers"   target="_blank"><i class="ti ti-star"></i> Stars</a>
+        <a class="badge gray"  href="https://github.com/suraj-premi/PC-Free/stargazers"   target="_blank"><i class="ti ti-star"></i> Stars</a>
         <a class="badge green" href="https://opensource.org/licenses/MIT"                  target="_blank"><i class="ti ti-license"></i> MIT</a>
         <a class="badge blue"  href="https://www.docker.com/"                               target="_blank"><i class="ti ti-brand-docker"></i> Docker</a>
         <a class="badge blue"  href="https://www.microsoft.com/windows"                     target="_blank"><i class="ti ti-brand-windows"></i> Windows 10</a>
@@ -742,7 +742,7 @@ code {
 
       <div class="quick-links">
         <a class="ql primary" href="quickstart.html"><i class="ti ti-rocket"></i> Quick Start</a>
-        <a class="ql ghost"   href="https://github.com/jephersonRD/pc-free" target="_blank"><i class="ti ti-brand-github"></i> View on GitHub</a>
+        <a class="ql ghost"   href="https://github.com/suraj-premi/PC-Free" target="_blank"><i class="ti ti-brand-github"></i> View on GitHub</a>
         <a class="ql ghost"   href="faq.html"><i class="ti ti-help-circle"></i> FAQ</a>
       </div>
     </div>
@@ -750,11 +750,11 @@ code {
     <!-- WHAT IS -->
     <section class="doc-section">
       <div class="section-title"><i class="ti ti-info-circle"></i> What is PC-Free?</div>
-      <p class="prose">PC-Free is an open-source project that lets you run <strong>Windows 10 directly in your web browser</strong> via GitHub Codespaces and Docker. No local installation, no powerful hardware, completely free.</p>
+      <p class="prose">PC-Free is an open-source project that lets you run <strong>Windows 10 directly in your web browser</strong> via GitHub Codespaces and Docker. No Windows PC is required; Codespaces use counts against your GitHub quota.</p>
       <div class="benefits-grid">
         <div class="benefit-item">
           <div class="benefit-icon"><i class="ti ti-coin-off"></i></div>
-          <div class="benefit-text">100% Free<span>No hidden costs or subscriptions</span></div>
+          <div class="benefit-text">Open Source<span>No PC-Free software fee</span></div>
         </div>
         <div class="benefit-item">
           <div class="benefit-icon"><i class="ti ti-world"></i></div>
@@ -762,7 +762,7 @@ code {
         </div>
         <div class="benefit-item">
           <div class="benefit-icon"><i class="ti ti-bolt"></i></div>
-          <div class="benefit-text">5-Minute Setup<span>Deploy Windows 10 in minutes</span></div>
+          <div class="benefit-text">Automatic Setup<span>Secure one-command deployment</span></div>
         </div>
         <div class="benefit-item">
           <div class="benefit-icon"><i class="ti ti-device-desktop-off"></i></div>
@@ -783,179 +783,114 @@ code {
     <section class="doc-section" id="quickstart">
       <div class="section-title"><i class="ti ti-rocket"></i> Quick Start</div>
 
-      <div class="section-title-sm"><i class="ti ti-number-1"></i> Method 1 — GitHub Codespaces (Recommended)</div>
-      <p class="prose">The fastest path to a running Windows environment. No local dependencies needed.</p>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Fork this repository</strong> — click the Fork button at the top-right of the GitHub page.</div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Open Codespace</strong> — click <code>Code → Codespaces → Create codespace on main</code>.</div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Wait ~2 minutes</strong> for the environment to auto-configure.</div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Follow the Setup Guide below</strong> to start your Windows container.</div></div>
+      <div class="warn-box">
+        <i class="ti ti-alert-triangle"></i>
+        <p><strong>Windows 10 reached end of support on October 14, 2025.</strong> Use it only when required, keep access private, and provide your own valid Microsoft licence.</p>
       </div>
 
-      <div class="section-title-sm" style="margin-top:24px;"><i class="ti ti-number-2"></i> Method 2 — Local Docker</div>
-      <p class="prose">Requires Docker Engine 20.10+ with KVM support on Linux. See <a href="#reqs">System Requirements</a> for details.</p>
+      <div class="section-title-sm"><i class="ti ti-number-1"></i> GitHub Codespaces (Recommended)</div>
+      <p class="prose">The repository now contains a complete Dev Container. It generates secure credentials, configures persistent storage, starts Windows 10, and forwards the browser viewer automatically.</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Fork this repository</strong>, then choose <code>Code → Codespaces → Create codespace</code>.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content">Choose an x86_64 machine with <strong>4+ cores and 32+ GB storage</strong>.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content">Wait for <strong>Windows 10 (Web)</strong> on port 8006 to open. Keep the forwarded port <strong>Private</strong>.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content">Run <code>./pcfree credentials</code> in the terminal to see the generated login.</div></div>
+      </div>
+
+      <div class="section-title-sm" style="margin-top:24px;"><i class="ti ti-number-2"></i> KVM-enabled Linux host</div>
+      <p class="prose">Clone the repository, then run one command. PC-Free checks every host requirement before downloading Windows.</p>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <pre>./pcfree setup</pre>
+      </div>
     </section>
 
     <!-- SETUP GUIDE -->
     <section class="doc-section" id="setup">
-      <div class="section-title"><i class="ti ti-terminal"></i> Setup Guide</div>
+      <div class="section-title"><i class="ti ti-terminal"></i> What Setup Does</div>
+      <p class="prose"><code>./pcfree setup</code> performs the complete setup without asking you to create YAML files or edit the Docker daemon:</p>
+      <div class="steps">
+        <div class="step"><div class="step-num"><i class="ti ti-key"></i></div><div class="step-content">Creates a Git-ignored, mode-<code>600</code> <code>.env</code> and generates a strong password.</div></div>
+        <div class="step"><div class="step-num"><i class="ti ti-check"></i></div><div class="step-content">Checks x86_64, CPU, RAM, free disk, Docker Compose v2, <code>/dev/kvm</code>, and <code>/dev/net/tun</code>.</div></div>
+        <div class="step"><div class="step-num"><i class="ti ti-download"></i></div><div class="step-content">Pulls the pinned Dockur image and starts an unattended Windows 10 Pro installation.</div></div>
+        <div class="step"><div class="step-num"><i class="ti ti-database"></i></div><div class="step-content">Stores the VM under <code>windows/</code> and exposes <code>shared/</code> as the guest's <strong>Z:</strong> drive.</div></div>
+      </div>
+      <p class="prose">The first download and installation normally takes 10–20 minutes. Open <code>http://localhost:8006</code> locally, or the private forwarded port 8006 in Codespaces.</p>
 
-      <div class="section-title-sm"><i class="ti ti-device-floppy"></i> 1. Check available storage</div>
+      <div class="section-title-sm"><i class="ti ti-stethoscope"></i> Check the host without downloading</div>
       <div class="code-block">
         <div class="code-header">
           <div class="code-dots"><span></span><span></span><span></span></div>
           <span class="code-lang">bash</span>
           <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
         </div>
-        <pre>df -h</pre>
+        <pre>./pcfree doctor</pre>
       </div>
-      <p class="prose">Pick the partition with the most free space.</p>
 
-      <div class="section-title-sm"><i class="ti ti-folder-plus"></i> 2. Create Docker data folder</div>
+      <div class="section-title-sm"><i class="ti ti-key"></i> Display the generated login</div>
       <div class="code-block">
         <div class="code-header">
           <div class="code-dots"><span></span><span></span><span></span></div>
           <span class="code-lang">bash</span>
           <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
         </div>
-        <pre>sudo mkdir -p /tmp/docker-data</pre>
-      </div>
-
-      <div class="section-title-sm"><i class="ti ti-settings"></i> 3. Configure Docker daemon</div>
-      <div class="code-block">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
-        </div>
-        <pre>sudo nano /etc/docker/daemon.json</pre>
-      </div>
-      <p class="prose">Add the following content:</p>
-      <div class="code-block">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">json</span>
-          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
-        </div>
-        <pre>{
-  <span class="k">"data-root"</span>: <span class="s">"/tmp/docker-data"</span>
-}</pre>
-      </div>
-
-      <div class="section-title-sm"><i class="ti ti-refresh"></i> 4. Restart Codespace, then verify Docker</div>
-      <div class="code-block">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
-        </div>
-        <pre>docker info <span class="c"># Docker Root Dir should be /tmp/docker-data</span></pre>
-      </div>
-
-      <div class="section-title-sm"><i class="ti ti-file-text"></i> windows10.yml</div>
-      <div class="code-block">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">yaml</span>
-          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
-        </div>
-        <pre><span class="c"># Run check_github_follow.sh before docker-compose up</span>
-services:
-  windows:
-    <span class="k">image:</span> <span class="s">dockurr/windows</span>
-    <span class="k">container_name:</span> <span class="s">windows</span>
-    <span class="k">environment:</span>
-      <span class="k">VERSION:</span> <span class="s">"10"</span>
-      <span class="k">USERNAME:</span> <span class="m">${WINDOWS_USERNAME}</span>
-      <span class="k">PASSWORD:</span> <span class="m">${WINDOWS_PASSWORD}</span>
-      <span class="k">RAM_SIZE:</span> <span class="s">"10G"</span>
-      <span class="k">CPU_CORES:</span> <span class="s">"4"</span>
-    <span class="k">ports:</span>
-      - <span class="s">"8006:8006"</span>   <span class="c"># Web interface</span>
-      - <span class="s">"3389:3389"</span>   <span class="c"># RDP</span>
-    <span class="k">volumes:</span>
-      - <span class="s">/tmp/docker-data:/mnt/disco1</span>
-      - <span class="s">windows-data:/mnt/windows-data</span>
-    <span class="k">restart:</span> <span class="s">always</span>
-<span class="k">volumes:</span>
-  windows-data:</pre>
-      </div>
-
-      <div class="section-title-sm"><i class="ti ti-key"></i> .env file</div>
-      <div class="code-block">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">.env</span>
-          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
-        </div>
-        <pre><span class="k">WINDOWS_USERNAME</span>=<span class="s">YourUsername</span>
-<span class="k">WINDOWS_PASSWORD</span>=<span class="s">YourPassword</span>
-<span class="k">GITHUB_USER</span>=<span class="s">YourGitHubUsername</span></pre>
+        <pre>./pcfree credentials</pre>
       </div>
       <div class="warn-box">
-        <i class="ti ti-alert-triangle"></i>
-        <p><strong>Never commit your .env file.</strong> Add it to <code>.gitignore</code> immediately: <code>echo ".env" >> .gitignore</code></p>
+        <i class="ti ti-shield-lock"></i>
+        <p>Keep <code>.env</code> private. The web viewer and RDP bind to <code>127.0.0.1</code> by default, and the web viewer requires the generated login.</p>
       </div>
     </section>
 
     <!-- COMMANDS -->
     <section class="doc-section" id="commands">
-      <div class="section-title"><i class="ti ti-terminal-2"></i> Commands</div>
-
-      <div class="section-title-sm"><i class="ti ti-player-play"></i> Start</div>
+      <div class="section-title"><i class="ti ti-terminal-2"></i> Management Commands</div>
       <div class="code-block">
         <div class="code-header">
           <div class="code-dots"><span></span><span></span><span></span></div>
           <span class="code-lang">bash</span>
           <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
         </div>
-        <pre>docker-compose -f windows10.yml up</pre>
-      </div>
-
-      <div class="section-title-sm"><i class="ti ti-player-stop"></i> Stop / Restart / Logs</div>
-      <div class="code-block">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
-        </div>
-        <pre>docker stop windows            <span class="c"># graceful shutdown</span>
-docker restart windows         <span class="c"># restart after freeze</span>
-docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</span></pre>
-      </div>
-
-      <div class="section-title-sm"><i class="ti ti-trash"></i> Remove everything</div>
-      <div class="code-block">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
-        </div>
-        <pre>docker-compose -f windows10.yml down -v</pre>
+        <pre>./pcfree start        <span class="c"># start or resume Windows</span>
+./pcfree stop         <span class="c"># graceful shutdown; data stays safe</span>
+./pcfree restart      <span class="c"># restart the VM</span>
+./pcfree status       <span class="c"># show container status</span>
+./pcfree logs         <span class="c"># follow install/runtime logs</span>
+./pcfree open         <span class="c"># open browser viewer</span>
+./pcfree credentials  <span class="c"># display login</span>
+./pcfree update       <span class="c"># pull configured image and recreate</span>
+./pcfree down         <span class="c"># remove container, preserve VM disk</span></pre>
       </div>
       <div class="warn-box">
         <i class="ti ti-alert-triangle"></i>
-        <p>The <code>-v</code> flag <strong>permanently deletes all Windows data</strong> including installed software and files.</p>
+        <p>To erase Windows permanently, stop it and manually delete <code>windows/</code>. This action cannot be undone.</p>
       </div>
     </section>
 
     <!-- CONFIG -->
     <section class="doc-section" id="config">
       <div class="section-title"><i class="ti ti-settings"></i> Configuration Options</div>
-      <p class="prose">Customize resources by editing the <code>environment</code> block in <code>windows10.yml</code>:</p>
+      <p class="prose">Setup creates <code>.env</code> from the safe template <code>.env.example</code>. Edit your local <code>.env</code>, then run <code>./pcfree down &amp;&amp; ./pcfree start</code>.</p>
       <div class="code-block">
         <div class="code-header">
           <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">yaml</span>
+          <span class="code-lang">.env</span>
           <button class="copy-btn" onclick="copyCode(this)"><i class="ti ti-copy"></i> Copy</button>
         </div>
-        <pre><span class="k">environment:</span>
-  <span class="k">VERSION:</span>    <span class="s">"10"</span>    <span class="c"># or "11" for Windows 11</span>
-  <span class="k">RAM_SIZE:</span>   <span class="s">"10G"</span>   <span class="c"># minimum 6G</span>
-  <span class="k">CPU_CORES:</span>  <span class="s">"4"</span>     <span class="c"># minimum 2</span>
-  <span class="k">DISK_SIZE:</span>  <span class="s">"64G"</span>   <span class="c"># virtual disk size</span></pre>
+        <pre><span class="k">WINDOWS_RAM_SIZE</span>=<span class="s">4G</span>
+<span class="k">WINDOWS_CPU_CORES</span>=<span class="s">2</span>
+<span class="k">WINDOWS_DISK_SIZE</span>=<span class="s">64G</span>
+<span class="k">WINDOWS_LANGUAGE</span>=<span class="s">en-US</span>
+<span class="k">WINDOWS_REGION</span>=<span class="s">en-US</span>
+<span class="k">WINDOWS_KEYBOARD</span>=<span class="s">en-US</span>
+<span class="k">WEB_PORT</span>=<span class="s">8006</span>
+<span class="k">RDP_PORT</span>=<span class="s">3389</span></pre>
       </div>
-      <p class="prose">To enable native <strong>RDP access</strong>, expose port <code>3389</code> and connect with any Remote Desktop client to <code>localhost:3389</code>.</p>
+      <p class="prose">RDP is available at <code>localhost:3389</code> after installation. Never expose RDP directly to the public internet; use a VPN or SSH tunnel for remote access.</p>
     </section>
 
     <!-- COMPARE -->
@@ -975,14 +910,14 @@ docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</spa
           <tbody>
             <tr>
               <td>Monthly Cost</td>
-              <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>$0 Free</span></td>
+              <td><span class="pill-sm amber"><i class="ti ti-brand-github"></i>Uses GH quota</span></td>
               <td><span class="pill-sm red"><i class="ti ti-circle-x"></i>$31–100+</span></td>
               <td><span class="pill-sm red"><i class="ti ti-circle-x"></i>$25–75+</span></td>
               <td><span class="pill-sm green"><i class="ti ti-circle-check"></i>$0 Free</span></td>
             </tr>
             <tr>
               <td>Setup Time</td>
-              <td><span class="pill-sm blue"><i class="ti ti-bolt"></i>5 min</span></td>
+              <td><span class="pill-sm blue"><i class="ti ti-bolt"></i>10–20 min</span></td>
               <td><span class="pill-sm gray"><i class="ti ti-clock"></i>30+ min</span></td>
               <td><span class="pill-sm gray"><i class="ti ti-clock"></i>30+ min</span></td>
               <td><span class="pill-sm gray"><i class="ti ti-clock"></i>15–30 min</span></td>
@@ -1020,20 +955,20 @@ docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</spa
         <div class="req-card">
           <div class="req-card-title"><i class="ti ti-brand-github"></i> GitHub Codespaces</div>
           <ul class="req-list">
-            <li>Free GitHub account</li>
+            <li>GitHub account with available Codespaces quota</li>
             <li>Chrome 90+, Firefox 88+, Edge 90+, Safari 14+</li>
-            <li>10 GB+ available Codespace storage</li>
+            <li>32 GB+ available Codespace storage</li>
             <li>Stable internet — 2 Mbps+ recommended</li>
           </ul>
         </div>
         <div class="req-card">
           <div class="req-card-title"><i class="ti ti-brand-docker"></i> Local Docker</div>
           <ul class="req-list">
-            <li>Docker Engine 20.10+</li>
-            <li>20 GB+ free disk space</li>
-            <li>8 GB+ RAM (16 GB recommended)</li>
-            <li>KVM (Linux) or Hyper-V (Windows Pro)</li>
-            <li>Linux, macOS, or Windows 10/11 Pro</li>
+            <li>Docker Engine with Docker Compose v2</li>
+            <li>32 GB+ free disk space</li>
+            <li>4 GB+ RAM (8 GB recommended)</li>
+            <li><code>/dev/kvm</code> and <code>/dev/net/tun</code> access</li>
+            <li>x86_64 Linux host (or Windows 11 with nested virtualization)</li>
           </ul>
         </div>
       </div>
@@ -1052,7 +987,7 @@ docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</spa
           </button>
           <div class="trouble-body"><div class="trouble-body-inner">
             <div class="trouble-ans">
-              Check Docker logs for specific errors with <code>docker logs windows</code>. On Linux, verify KVM access: <code>ls -la /dev/kvm</code>. If <code>/dev/kvm</code> doesn't exist, KVM virtualization may need to be enabled in your BIOS.
+              Run <code>./pcfree doctor</code> for requirement checks, then <code>./pcfree logs</code> for the specific container error. If <code>/dev/kvm</code> is missing, enable virtualization in BIOS/UEFI and nested virtualization on a VM.
             </div>
           </div></div>
         </div>
@@ -1065,7 +1000,7 @@ docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</spa
           </button>
           <div class="trouble-body"><div class="trouble-body-inner">
             <div class="trouble-ans">
-              Reduce RAM to <code>6G</code> and CPU to <code>2</code> cores in <code>windows10.yml</code>. Close other resource-intensive Codespace apps and check your Codespace machine type in GitHub settings.
+              Use a host with at least 4 GB RAM and 2 CPU cores, close other heavy Codespace apps, and use RDP at <code>localhost:3389</code> after installation for better responsiveness.
             </div>
           </div></div>
         </div>
@@ -1078,7 +1013,7 @@ docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</spa
           </button>
           <div class="trouble-body"><div class="trouble-body-inner">
             <div class="trouble-ans">
-              In your Codespace, open the <strong>Ports</strong> tab, find port 8006, right-click and set visibility to <strong>Public</strong>. Then click the globe icon to open in browser. For local Docker, check your firewall settings.
+              Run <code>./pcfree status</code>. In Codespaces, open the <strong>Ports</strong> tab, keep port 8006 <strong>Private</strong>, and click its globe icon. Locally, open <code>http://localhost:8006</code>.
             </div>
           </div></div>
         </div>
@@ -1091,7 +1026,7 @@ docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</spa
           </button>
           <div class="trouble-body"><div class="trouble-body-inner">
             <div class="trouble-ans">
-              Clean unused Docker data with <code>docker system prune -a</code> then verify available space with <code>df -h</code>. This removes unused images, containers, and build cache.
+              Inspect usage with <code>df -h</code> and <code>docker system df</code>. The persistent VM is in <code>windows/</code>; do not delete that folder unless you intend to erase Windows.
             </div>
           </div></div>
         </div>
@@ -1104,7 +1039,7 @@ docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</spa
           </button>
           <div class="trouble-body"><div class="trouble-body-inner">
             <div class="trouble-ans">
-              Wait 2–3 minutes for the desktop to fully load, then try refreshing the browser tab. Verify the container is still running with <code>docker ps</code>. If not, restart it: <code>docker restart windows</code>.
+              Wait 2–3 minutes, refresh the browser, and check <code>./pcfree status</code>. If needed, run <code>./pcfree restart</code> and follow progress with <code>./pcfree logs</code>.
             </div>
           </div></div>
         </div>
@@ -1121,14 +1056,14 @@ docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</spa
         <div class="roadmap-item done"><div class="road-check done"><i class="ti ti-check"></i></div> Web interface (noVNC)</div>
         <div class="roadmap-item done"><div class="road-check done"><i class="ti ti-check"></i></div> Persistent storage volumes</div>
         <div class="roadmap-item done"><div class="road-check done"><i class="ti ti-check"></i></div> Windows 11 support</div>
-        <div class="roadmap-item"><div class="road-check todo"><i class="ti ti-clock"></i></div> One-click installer script</div>
+        <div class="roadmap-item done"><div class="road-check done"><i class="ti ti-check"></i></div> One-command setup and diagnostics</div>
         <div class="roadmap-item"><div class="road-check todo"><i class="ti ti-clock"></i></div> GPU passthrough (local Docker)</div>
         <div class="roadmap-item"><div class="road-check todo"><i class="ti ti-clock"></i></div> Audio support improvement</div>
         <div class="roadmap-item"><div class="road-check todo"><i class="ti ti-clock"></i></div> Clipboard synchronization</div>
         <div class="roadmap-item"><div class="road-check todo"><i class="ti ti-clock"></i></div> Multiple Windows instances</div>
       </div>
       <br>
-      <a class="ql ghost" href="https://github.com/jephersonRD/pc-free/discussions" target="_blank" style="display:inline-flex;">
+      <a class="ql ghost" href="https://github.com/suraj-premi/PC-Free/discussions" target="_blank" style="display:inline-flex;">
         <i class="ti ti-message-circle"></i> Vote for features →
       </a>
     </section>
@@ -1136,20 +1071,20 @@ docker logs -f windows         <span class="c"># live logs (Ctrl+C to exit)</spa
     <!-- CONTRIBUTING -->
     <section class="doc-section" id="contribute">
       <div class="section-title"><i class="ti ti-git-pull-request"></i> Contributing</div>
-      <p class="prose">Contributions are welcome! Fork the repo, create a feature branch, commit your changes, and open a Pull Request. See <a href="https://github.com/jephersonRD/pc-free/blob/main/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a> for guidelines.</p>
+      <p class="prose">Contributions are welcome! Fork the repo, create a feature branch, commit your changes, and open a Pull Request. See <a href="https://github.com/suraj-premi/PC-Free/blob/main/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a> for guidelines.</p>
 
       <div class="contrib-grid">
-        <a class="contrib-card" href="https://github.com/jephersonRD/pc-free/issues" target="_blank">
+        <a class="contrib-card" href="https://github.com/suraj-premi/PC-Free/issues" target="_blank">
           <i class="ti ti-bug"></i>
           <strong>Report Bugs</strong>
           <span>Open an issue on GitHub</span>
         </a>
-        <a class="contrib-card" href="https://github.com/jephersonRD/pc-free/discussions" target="_blank">
+        <a class="contrib-card" href="https://github.com/suraj-premi/PC-Free/discussions" target="_blank">
           <i class="ti ti-bulb"></i>
           <strong>Suggest Features</strong>
           <span>Start a discussion</span>
         </a>
-        <a class="contrib-card" href="https://github.com/jephersonRD/pc-free" target="_blank">
+        <a class="contrib-card" href="https://github.com/suraj-premi/PC-Free" target="_blank">
           <i class="ti ti-star"></i>
           <strong>Star the Repo</strong>
           <span>Show your support</span>

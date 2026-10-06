@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-adsense-account" content="ca-pub-9208880316800976">
-<title>FAQ | PC-Free — Free Windows 10 Browser PC (2025)</title>
+<title>FAQ | PC-Free — Windows 10 Browser PC</title>
 <meta name="description" content="Common questions about running Windows 10 free in your browser. Is it really free? Works on mobile? How long to boot? All answers here.">
 <meta name="keywords" content="windows 10 browser free faq, cloud pc questions, run windows online help, free cloud pc faq">
 <link rel="canonical" href="https://jephersonrd.github.io/PC-Free/faq.html">
@@ -278,7 +278,7 @@ h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent) 0%
       <a href="Compare.html"   class="nav-link">COMPARISON</a>
       <a href="faq.html"       class="nav-link active">FAQ</a>
       <a href="docs.html"      class="nav-link">DOCS</a>
-      <a href="https://github.com/jephersonRD/pc-free" class="nav-link" target="_blank">GITHUB</a>
+      <a href="https://github.com/suraj-premi/PC-Free" class="nav-link" target="_blank">GITHUB</a>
     </div>
   </nav>
 
@@ -302,7 +302,7 @@ h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent) 0%
         <div class="faq-body-inner">
           <div class="faq-answer">
             <span class="tag amber"><i class="ti ti-clock"></i> First boot</span> &nbsp;
-            Takes <strong>5 – 10 minutes</strong> while downloading the Windows image from Microsoft's servers. This only happens once.<br><br>
+            Usually takes <strong>10 – 20 minutes</strong> for the download and unattended Windows installation. This only happens once.<br><br>
             <span class="tag green"><i class="ti ti-refresh"></i> Subsequent boots</span> &nbsp;
             Once cached, your environment is up in <strong>2 – 3 minutes</strong>.
           </div>
@@ -319,10 +319,10 @@ h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent) 0%
       <div class="faq-body" role="region">
         <div class="faq-body-inner">
           <div class="faq-answer">
-            <span class="tag green"><i class="ti ti-circle-check"></i> Free tier</span> &nbsp;
-            Yes! GitHub provides <strong>120 hours/month</strong> of Codespaces for free. This is enough for light daily use.<br><br>
-            <span class="tag blue"><i class="ti ti-star"></i> Paid plans</span> &nbsp;
-            If you need more power or longer sessions, upgrade to a paid Codespaces plan — PC-Free just runs on top of it.
+            <span class="tag green"><i class="ti ti-circle-check"></i> Open source</span> &nbsp;
+            PC-Free has no software fee. GitHub Codespaces usage is billed against the quota included with your current GitHub plan.<br><br>
+            <span class="tag blue"><i class="ti ti-star"></i> Check first</span> &nbsp;
+            Quotas and available machine sizes can change, so check your GitHub billing page before creating a large Codespace.
           </div>
         </div>
       </div>
@@ -382,7 +382,7 @@ h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent) 0%
       <div class="faq-body" role="region">
         <div class="faq-body-inner">
           <div class="faq-answer">
-            PC-Free is just a web interface. It runs entirely in the browser. The "heavy lifting" (Windows, Docker, RDP) happens inside a GitHub Codespace running Ubuntu.
+            PC-Free uses the Dockur Windows container on an x86_64 Linux host with KVM. That host can be a GitHub Codespace or your own compatible Linux machine; the Windows display is delivered through the browser or RDP.
           </div>
         </div>
       </div>
@@ -429,7 +429,7 @@ h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent) 0%
         "name": "How long does Windows take to boot?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "First boot takes 5-10 minutes while downloading the Windows image. Subsequent boots take 2-3 minutes."
+          "text": "First boot usually takes 10-20 minutes for download and unattended installation. Subsequent boots take 2-3 minutes."
         }
       },
       {
@@ -437,7 +437,7 @@ h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent) 0%
         "name": "Is it really free? What's the catch?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes! GitHub provides 120 hours/month of Codespaces for free. This is enough for light daily use."
+          "text": "PC-Free has no software fee. Codespaces usage counts against the quota included with your current GitHub plan."
         }
       },
       {

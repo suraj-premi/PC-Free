@@ -1,0 +1,298 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+COMPOSE_FILE="$ROOT/windows10.yml"
+ENV_FILE="$ROOT/.env"
+
+if [ -t 1 ]; then
+  BLUE='\033[0;34m'; GREEN='\033[0;32m'; YELLOW='\033[0;33m'; RED='\033[0;31m'; BOLD='\033[1m'; RESET='\033[0m'
+else
+  BLUE=''; GREEN=''; YELLOW=''; RED=''; BOLD=''; RESET=''
+fi
+
+info() { printf "%bℹ%b %s\n" "$BLUE" "$RESET" "$*"; }
+ok() { printf "%b✓%b %s\n" "$GREEN" "$RESET" "$*"; }
+warn() { printf "%b!%b %s\n" "$YELLOW" "$RESET" "$*" >&2; }
+error() { printf "%b✗%b %s\n" "$RED" "$RESET" "$*" >&2; }
+
+usage() {
+  cat <<'EOF'
+PC-Free — Windows 10 manager
+
+Usage: ./pcfree <command>
+
+  setup        .env banaye, system check kare, aur Windows 10 start kare
+  init         Sirf secure .env aur data folders banaye
+  doctor       Docker, KVM, RAM, CPU aur storage check kare
+  start        Windows 10 start kare
+  stop         Windows ko safely stop kare (data safe rahega)
+  restart      Windows restart kare
+  status       Container status dikhaye
+  logs         Live installation/runtime logs dikhaye
+  credentials Windows aur web login dikhaye
+  open         Browser mein Windows web viewer khole
+  update       Container image pull karke Windows restart kare
+  down         Container hataye; Windows data delete nahi hoga
+  help         Yeh help dikhaye
+
+Settings badalne ke liye .env edit karein. VM data windows/ mein aur shared
+files shared/ mein rehti hain.
+EOF
+}
+
+init_env() {
+  bash "$ROOT/scripts/init-env.sh"
+  validate_env
+}
+
+need_env() {
+  if [ ! -f "$ENV_FILE" ]; then
+    info 'Pehli baar configuration ban rahi hai…'
+    init_env
+  else
+    validate_env
+  fi
+}
+
+need_docker() {
+  if ! command -v docker >/dev/null 2>&1; then
+    error 'Docker nahi mila. Docker Engine + Compose v2 install karein.'
+    return 1
+  fi
+  if ! docker compose version >/dev/null 2>&1; then
+    error '`docker compose` nahi mila. Docker Compose v2 plugin install karein.'
+    return 1
+  fi
+  if ! docker info >/dev/null 2>&1; then
+    error 'Docker daemon available nahi hai ya current user ko permission nahi hai.'
+    return 1
+  fi
+}
+
+compose() {
+  docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" "$@"
+}
+
+env_value() {
+  local key="$1" value
+  [ -f "$ENV_FILE" ] || return 1
+  value="$(awk -F= -v key="$key" '$1 == key { print substr($0, index($0, "=") + 1); exit }' "$ENV_FILE")"
+  value="${value%$'\r'}"
+  if [[ "$value" == \"*\" && "$value" == *\" ]]; then value="${value:1:${#value}-2}"; fi
+  if [[ "$value" == \'*\' && "$value" == *\' ]]; then value="${value:1:${#value}-2}"; fi
+  printf '%s' "$value"
+}
+
+validate_env() {
+  local username password
+  username="$(env_value WINDOWS_USERNAME 2>/dev/null || true)"
+  password="$(env_value WINDOWS_PASSWORD 2>/dev/null || true)"
+  if [ -z "$username" ]; then
+    error '.env mein WINDOWS_USERNAME missing hai.'
+    return 1
+  fi
+  if [ -z "$password" ] || [ "$password" = 'change-me' ]; then
+    error '.env mein secure WINDOWS_PASSWORD missing hai. .env hata kar `./pcfree init` dobara chalayein.'
+    return 1
+  fi
+}
+
+doctor() {
+  local failures=0 warnings=0 arch cpus mem_kb disk_kb
+  printf '%bPC-Free system check%b\n\n' "$BOLD" "$RESET"
+
+  arch="$(uname -m)"
+  if [[ "$arch" == 'x86_64' || "$arch" == 'amd64' ]]; then
+    ok "Architecture: $arch"
+  else
+    error "Architecture $arch supported nahi hai; Windows 10 image ko x86_64 host chahiye."
+    ((failures += 1))
+  fi
+
+  cpus="$(getconf _NPROCESSORS_ONLN 2>/dev/null || nproc 2>/dev/null || printf '0')"
+  if (( cpus >= 2 )); then
+    ok "CPU: $cpus cores"
+  else
+    error "Kam se kam 2 CPU cores chahiye (mile: $cpus)."
+    ((failures += 1))
+  fi
+
+  mem_kb="$(awk '/^MemTotal:/ {print $2}' /proc/meminfo 2>/dev/null || printf '0')"
+  if (( mem_kb >= 4194304 )); then
+    ok "RAM: $((mem_kb / 1024 / 1024)) GiB"
+  elif (( mem_kb >= 2097152 )); then
+    warn "RAM sirf $((mem_kb / 1024 / 1024)) GiB hai; .env mein WINDOWS_RAM_SIZE=2G use karein."
+    ((warnings += 1))
+  else
+    error 'Kam se kam 2 GiB RAM chahiye; 4 GiB ya zyada recommended hai.'
+    ((failures += 1))
+  fi
+
+  disk_kb="$(df -Pk "$ROOT" 2>/dev/null | awk 'NR == 2 {print $4}')"
+  disk_kb="${disk_kb:-0}"
+  if (( disk_kb >= 33554432 )); then
+    ok "Free storage: $((disk_kb / 1024 / 1024)) GiB"
+  else
+    error "Kam se kam 32 GiB free storage chahiye (available: $((disk_kb / 1024 / 1024)) GiB)."
+    ((failures += 1))
+  fi
+
+  if [ -c /dev/kvm ]; then
+    ok 'KVM acceleration device available hai.'
+    if [ ! -r /dev/kvm ] || [ ! -w /dev/kvm ]; then
+      warn '/dev/kvm current user ke liye read/write nahi hai; rootless Docker use karte hain to kvm group permission dein.'
+      ((warnings += 1))
+    fi
+  else
+    error '/dev/kvm nahi mila. BIOS/UEFI virtualization aur nested virtualization enable karein.'
+    ((failures += 1))
+  fi
+
+  if [ -c /dev/net/tun ]; then
+    ok 'TUN networking available hai.'
+  else
+    error '/dev/net/tun nahi mila.'
+    ((failures += 1))
+  fi
+
+  if command -v docker >/dev/null 2>&1; then
+    ok "Docker CLI: $(docker --version 2>/dev/null | head -1)"
+    if docker compose version >/dev/null 2>&1; then
+      ok "Compose: $(docker compose version --short 2>/dev/null || docker compose version 2>/dev/null)"
+    else
+      error 'Docker Compose v2 plugin nahi mila.'
+      ((failures += 1))
+    fi
+    if docker info >/dev/null 2>&1; then
+      ok 'Docker daemon chal raha hai.'
+    else
+      error 'Docker daemon available nahi hai ya permission denied hai.'
+      ((failures += 1))
+    fi
+  else
+    error 'Docker CLI install nahi hai.'
+    ((failures += 1))
+  fi
+
+  printf '\n'
+  if (( failures > 0 )); then
+    error "$failures required check(s) fail hue; Windows start nahi kiya gaya."
+    return 1
+  fi
+  if (( warnings > 0 )); then
+    warn "$warnings warning(s) ke saath system usable hai."
+  else
+    ok 'System Windows 10 ke liye ready hai.'
+  fi
+}
+
+show_credentials() {
+  need_env
+  local username password
+  username="$(env_value WINDOWS_USERNAME)"
+  password="$(env_value WINDOWS_PASSWORD)"
+  printf 'Windows/Web username: %s\nWindows/Web password: %s\n' "$username" "$password"
+  warn 'Password private rakhein; .env ko commit/share na karein.'
+}
+
+viewer_url() {
+  local port domain bind
+  port="$(env_value WEB_PORT 2>/dev/null || true)"; port="${port:-8006}"
+  if [ -n "${CODESPACE_NAME:-}" ]; then
+    domain="${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN:-app.github.dev}"
+    printf 'https://%s-%s.%s' "$CODESPACE_NAME" "$port" "$domain"
+  else
+    bind="$(env_value WEB_BIND_ADDRESS 2>/dev/null || true)"
+    [[ -z "$bind" || "$bind" == '0.0.0.0' ]] && bind='localhost'
+    printf 'http://%s:%s' "$bind" "$port"
+  fi
+}
+
+open_viewer() {
+  need_env
+  local url
+  url="$(viewer_url)"
+  info "Windows viewer: $url"
+  if command -v xdg-open >/dev/null 2>&1; then
+    xdg-open "$url" >/dev/null 2>&1 || true
+  elif command -v open >/dev/null 2>&1; then
+    open "$url" >/dev/null 2>&1 || true
+  else
+    warn 'Browser auto-open available nahi hai; upar wala URL manually kholein.'
+  fi
+}
+
+command="${1:-help}"
+case "$command" in
+  setup)
+    init_env
+    doctor
+    need_docker
+    info 'Windows 10 image download ho rahi hai (first run mein waqt lagega)…'
+    compose pull
+    compose up -d
+    ok 'Windows 10 start ho gaya. Installation aam taur par 10-20 minutes leti hai.'
+    info "Viewer: $(viewer_url)"
+    info 'Login dekhne ke liye: ./pcfree credentials'
+    ;;
+  init)
+    init_env
+    ok 'Configuration ready hai. Start karne ke liye `./pcfree start` chalayein.'
+    ;;
+  doctor)
+    doctor
+    ;;
+  start)
+    need_env
+    doctor
+    need_docker
+    compose up -d
+    ok "Windows 10 start ho raha hai: $(viewer_url)"
+    ;;
+  stop)
+    need_env; need_docker
+    compose stop
+    ok 'Windows safely stop ho gaya; data save hai.'
+    ;;
+  restart)
+    need_env; need_docker
+    compose restart
+    ok 'Windows restart ho raha hai.'
+    ;;
+  status)
+    need_env; need_docker
+    compose ps
+    ;;
+  logs)
+    need_env; need_docker
+    compose logs --follow --tail=150 windows
+    ;;
+  credentials)
+    show_credentials
+    ;;
+  open)
+    open_viewer
+    ;;
+  update)
+    need_env
+    doctor
+    need_docker
+    compose pull
+    compose up -d
+    ok 'PC-Free image update ho gayi; Windows data safe hai.'
+    ;;
+  down)
+    need_env; need_docker
+    compose down
+    ok 'Container remove ho gaya; windows/ ka data delete nahi hua.'
+    ;;
+  help|-h|--help)
+    usage
+    ;;
+  *)
+    error "Unknown command: $command"
+    usage >&2
+    exit 2
+    ;;
+esac

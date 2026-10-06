@@ -1,0 +1,17 @@
+# Secrets and machine-specific settings
+.env
+.env.*
+!.env.example
+
+# Windows VM data (large, generated locally)
+windows/
+shared/
+*.iso
+*.img
+*.qcow2
+*.raw
+
+# Local tooling
+.DS_Store
+Thumbs.db
+.vscode/

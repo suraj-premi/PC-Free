@@ -1,0 +1,32 @@
+name: Validate Windows 10 setup
+
+on:
+  push:
+    paths:
+      - "windows10.yml"
+      - ".env.example"
+      - "pcfree"
+      - "scripts/**"
+      - ".devcontainer/**"
+      - "tests/**"
+      - ".github/workflows/validate.yml"
+  pull_request:
+    paths:
+      - "windows10.yml"
+      - ".env.example"
+      - "pcfree"
+      - "scripts/**"
+      - ".devcontainer/**"
+      - "tests/**"
+      - ".github/workflows/validate.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Validate setup files
+        run: bash tests/validate-setup.sh
